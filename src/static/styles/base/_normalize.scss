@@ -1,0 +1,35 @@
+* {
+  vertical-align: middle;
+}
+
+html, body {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  background-color: #F7F7F7;
+  color: #333;
+}
+
+body, input, textarea, button {
+  font-size: 14px;
+  font-family: helvetica;
+}
+
+html, body, ul {
+  margin: 0;
+  padding: 0;
+}
+
+button, input, textarea {
+  outline: none;
+}
+
+[draggable] {
+  user-select: none;
+}
+
+textarea {
+  resize: none;
+}
