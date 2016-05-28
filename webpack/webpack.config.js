@@ -32,9 +32,6 @@ module.exports = {
       'lodash',
       'simplestorage.js',
       'inflection',
-      'highcharts',
-      'mixin-deep',
-      'node-uuid',
       'bootstrap-loader/extractStyles',
     ]
   },
@@ -95,6 +92,7 @@ module.exports = {
       __DEV__: false,
       __DEBUG__: false,
       __PROD__: true,
+      __INITIAL_STATE__: {},
       'process.env': {
         'NODE_ENV': JSON.stringify('development'),
       },

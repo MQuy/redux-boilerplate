@@ -1,9 +1,9 @@
-# Redux Boilerplate
+# Redux Auth Boilerplate
 
 ### Getting Started
 
 ```bash
-$ git clone https://github.com/MQuy/redux-boilerplater
+$ git clone https://github.com/MQuy/redux-auth-boilerplate
 $ cd redux-boilerplater
 $ npm install
 $ node client.js        # launch client

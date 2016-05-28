@@ -15,10 +15,6 @@ app.post('/users/sign_in', function(req, res) {
   res.json(users[0]);
 });
 
-app.get('/users/me', function(req, res) {
-  res.json(users[1]);
-});
-
 app.get('/users/:id', function(req, res) {
   res.json(users[0]);
 });
