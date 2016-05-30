@@ -55,13 +55,10 @@ module.exports = {
       loader: 'babel',
       query: {
         babelrc: false,
-        presets: ["es2015", "react", "stage-0"],
+        presets: ["es2015", "react", "stage-0", "react-optimize"],
         plugins: [
           "transform-runtime",
-          "transform-decorators-legacy",
-          "transform-react-remove-prop-types",
-          "transform-react-constant-elements",
-          "transform-react-inline-elements"
+          "transform-decorators-legacy"
         ]
       }
     }, {

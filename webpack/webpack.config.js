@@ -45,7 +45,6 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.(js|jsx)$/,
-      include: path.join(rootPath, 'src'),
       exclude: /node_modules/,
       loaders: ['react-hot', 'babel'],
     }, {
@@ -53,11 +52,9 @@ module.exports = {
       loader: 'json-loader',
     }, {
       test: /\.txt$/,
-      include: path.join(rootPath, 'src'),
       loader: 'raw-loader',
     }, {
       test: /\.(css|scss)$/,
-      include: path.join(rootPath, 'src'),
       loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules!sass-loader!postcss-loader')
     }, {
       test: /\.woff(\?.*)?$/,
