@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-class Root extends Component {
+export class Root extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired
   }
