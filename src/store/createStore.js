@@ -3,9 +3,11 @@ import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 
 import reducers from './reducers'
+import { get, post } from '$root/modules/fetch'
 
 export default (initialState = {}, history) => {
-  let middleware = applyMiddleware(thunk, routerMiddleware(history))
+  const thunkWrapper = thunk.withExtraArgument({ get, post })
+  let middleware = applyMiddleware(thunkWrapper, routerMiddleware(history))
 
   const store = createStore(reducers(), initialState, middleware)
 

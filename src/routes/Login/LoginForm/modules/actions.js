@@ -3,7 +3,7 @@ import { post } from '$root/modules/fetch'
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
-function loginSuccess(json) {
+export function loginSuccess(json) {
   return {
     type: LOGIN_SUCCESS,
     user: json

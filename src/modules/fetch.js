@@ -23,7 +23,7 @@ export function request(path, params) {
     'Token': currentUser.authenticationToken,
     ...(params.headers || {})
   }
-  return fetch(`http://localhost:3000${path}`, params)
+  return fetch(`http://0.0.0.0:3000${path}`, params)
     .then(parseJSON)
     .then(json => normalize(json));
 }
