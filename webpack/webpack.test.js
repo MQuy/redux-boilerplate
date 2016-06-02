@@ -7,9 +7,11 @@ const karmaConfig = {
   files: [
     'node_modules/whatwg-fetch/fetch.js',
     'node_modules/babel-polyfill/dist/polyfill.js',
+    'tests/testHelper.js',
     'tests/**/*.spec.js'
   ],
   preprocessors: {
+    'tests/testHelper.js': ['webpack'],
     'tests/**/*.spec.js': ['webpack', 'coverage']
   },
   browsers: ['PhantomJS'],
@@ -43,8 +45,7 @@ const karmaConfig = {
     require("karma-chai"),
     require("karma-coverage"),
     require("karma-mocha-reporter"),
-    require("karma-sinon"),
-    require("karma-sinon-chai"),
+    require("karma-sinon")
   ]
 }
 
