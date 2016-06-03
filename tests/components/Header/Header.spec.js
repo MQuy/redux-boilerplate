@@ -15,8 +15,8 @@ describe("(Component) Header", () => {
   })
 
 
-  it('Should render as a <nav>.', () => {
-    expect(_wrapper.is('nav')).to.be.ok
+  it('Should render as a <header>.', () => {
+    expect(_wrapper.is('header')).to.be.ok
   })
 
   it('Should render logo in <li>', () => {

@@ -19,25 +19,27 @@ export class Header extends Component {
     const { currentUser } = this.props;
 
     return (
-      <nav className={`navbar ${style.nav}`}>
-        <div className="container">
-          <ul className="nav navbar-nav">
-            <li className="nav-item">
-              <Link to='/'>
-                <img src='https://camo.githubusercontent.com/f28b5bc7822f1b7bb28a96d8d09e7d79169248fc/687474703a2f2f692e696d6775722e636f6d2f4a65567164514d2e706e67' className={style.logo}/>
-              </Link>
-            </li>
-          </ul>
-          <ul className={`nav navbar-nav pull-xs-right ${style.navRight}`}>
-            <li className="nav-item">
-              {currentUser.fullName}
-            </li>
-            <li className="nav-item" onClick={this.signOut.bind(this)}>
-              <i className={`fa fa-sign-out ${style.icon}`}/>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <header>
+        <nav className={`navbar ${style.nav}`}>
+          <div className="container">
+            <ul className="nav navbar-nav">
+              <li className="nav-item">
+                <Link to='/'>
+                  <img src='https://camo.githubusercontent.com/f28b5bc7822f1b7bb28a96d8d09e7d79169248fc/687474703a2f2f692e696d6775722e636f6d2f4a65567164514d2e706e67' className={style.logo}/>
+                </Link>
+              </li>
+            </ul>
+            <ul className={`nav navbar-nav pull-xs-right ${style.navRight}`}>
+              <li className="nav-item">
+                {currentUser.fullName}
+              </li>
+              <li className="nav-item" onClick={this.signOut.bind(this)}>
+                <i className={`fa fa-sign-out ${style.icon}`}/>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
     )
   }
 }

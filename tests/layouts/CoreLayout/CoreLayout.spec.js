@@ -2,30 +2,31 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import { shallow } from 'enzyme'
+import { render } from 'enzyme'
 import { CoreLayout } from '$root/layouts/CoreLayout/CoreLayout'
 
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
-const store = mockStore()
+const store = mockStore({ currentUser: {} })
 
 describe("(Component) CoreLayout", () => {
   let _wrapper, _props
 
   beforeEach(() => {
-    _props = {
-      children: <anchor/>
-    }
-    _wrapper = shallow(<CoreLayout {..._props}/>, { context: { store } })
+    _props = { children: <anchor/> }
+    _wrapper = render(
+      <Provider store={store}>
+        <CoreLayout {..._props}/>
+      </Provider>
+    )
   })
 
-  it('Should render Header', () => {
-    console.log(_wrapper.html())
-    expect(_wrapper.find('Header')).to.have.length(1)
+  it('Should render <header>', () => {
+    expect(_wrapper.find('header')).to.have.length(1)
   })
 
-  it('Should render Footer', () => {
-    expect(_wrapper.find('Footer')).to.have.length(1)
+  it('Should render <footer>', () => {
+    expect(_wrapper.find('footer')).to.have.length(1)
   })
 
   it('Should render <anchor>', () => {
