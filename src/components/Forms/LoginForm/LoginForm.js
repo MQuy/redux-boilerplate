@@ -8,6 +8,7 @@ export class LoginForm extends Component {
     this.setState({ [field]: e.target.value })
   }
   formSubmit(e) {
+    e.preventDefault();
     const { email, password } = this.state;
     const { onSubmit } = this.props;
 
@@ -28,10 +29,10 @@ export class LoginForm extends Component {
           }
 
           <div className="form-group">
-            <input type="text" placeholder="abc@studynow.vn" value={email} className="form-control" onChange={this.fieldChange('email')}/>
+            <input type="text" name="email" placeholder="abc@studynow.vn" value={email} className="form-control" onChange={this.fieldChange('email')}/>
           </div>
           <div className="form-group">
-            <input type="password" placeholder="password" value={password} className="form-control" onChange={this.fieldChange('password')}/>
+            <input type="password" name="password" placeholder="password" value={password} className="form-control" onChange={this.fieldChange('password')}/>
           </div>
           <div className={style.btnControl}>
             <button className="btn btn-secondary" type="submit">Login</button>

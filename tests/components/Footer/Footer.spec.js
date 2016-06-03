@@ -10,6 +10,6 @@ describe("(Component) Footer", () => {
   })
 
   it('Should render', () => {
-    expect(_wrapper.is('div')).to.be.ok
+    expect(_wrapper.is('footer')).to.be.ok
   })
 })
