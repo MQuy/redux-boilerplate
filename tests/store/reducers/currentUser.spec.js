@@ -5,7 +5,7 @@ import { AUTHORIZED_SUCCESS, SIGNOUT_SUCCESS } from '$root/modules/currentUser'
 const user = { id: 1 }
 const initialState = undefined;
 
-describe('currentUser reducer', () => {
+describe("(Reducer) currentUser", () => {
   it('should return initial state', () => {
     expect(reducer(initialState, {})).to.eql({})
   })

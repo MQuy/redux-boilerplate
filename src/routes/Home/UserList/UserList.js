@@ -10,7 +10,7 @@ import { activeUser } from './modules/reducers'
 import style from './UserList.scss'
 
 @refetch({ users: '/users' })
-class UserList extends Component {
+export class UserList extends Component {
   static contextTypes = {
     store: PropTypes.object
   }

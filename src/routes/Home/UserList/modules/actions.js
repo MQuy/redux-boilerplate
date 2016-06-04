@@ -1,6 +1,6 @@
 export const CHANGE_ACTIVE_USER = 'CHANGE_ACTIVE_USER';
 
-function activeUser(user) {
+export function activeUser(user) {
   return {
     type: CHANGE_ACTIVE_USER,
     user: user

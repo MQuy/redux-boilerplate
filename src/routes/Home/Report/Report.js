@@ -5,24 +5,11 @@ import { get } from '$root/modules/fetch'
 import Loading from '$root/components/Loading'
 import style from './Report.scss'
 
-class Report extends Component {
+export class Report extends Component {
   static propTypes = {
     user: PropTypes.object
   }
-  state = {
-    chartData: {},
-    status: 'init',
-    user: {}
-  }
-  componentWillReceiveProps(nextProps) {
-    const { user } = nextProps;
-
-    this.setState({ status: 'loading' });
-    get(`/users/${user.id}`)
-      .then(json => this.setState({ chartData: json, status: 'done' }))
-  }
   render() {
-    const { status } = this.state;
     const { user } = this.props;
 
     return (

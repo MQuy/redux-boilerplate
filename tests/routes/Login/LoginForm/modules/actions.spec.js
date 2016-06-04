@@ -9,7 +9,7 @@ const user = { id: 1 }
 const expectedAction = { type: LOGIN_SUCCESS, user };
 const store = mockStore({ currentUser: {} })
 
-describe('actions', () => {
+describe('(Actions) LoginFormContainer', () => {
   afterEach(() => {
     store.clearActions();
     fetchMock.restore();
