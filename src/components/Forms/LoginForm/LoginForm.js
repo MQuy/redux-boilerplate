@@ -44,7 +44,7 @@ export class LoginForm extends Component {
 }
 
 LoginForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
   messages: PropTypes.array
 }
 
