@@ -8,6 +8,11 @@ export class LoginFormContainer extends Component {
     router: PropTypes.object
   }
   state = { messages: [] }
+  constructor(props) {
+    super(props)
+
+    this.formSubmit = this.formSubmit.bind(this)
+  }
   formSubmit(email, password) {
     const { dispatch } = this.props;
     const { router } = this.context;
@@ -22,7 +27,7 @@ export class LoginFormContainer extends Component {
     const { messages } = this.state;
 
     return (
-      <LoginForm onSubmit={this.formSubmit.bind(this)} messages={messages}/>
+      <LoginForm onSubmit={this.formSubmit} messages={messages}/>
     )
   }
 }

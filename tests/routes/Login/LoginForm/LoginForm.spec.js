@@ -24,6 +24,10 @@ describe("(Component) LoginFormContainer", () => {
     expect(_wrapper.containsMatchingElement(<LoginForm/>)).to.be.ok
   })
 
+  it('Should start with empty messages', () => {
+    expect(_wrapper.state('messages')).to.eql([])
+  })
+
   it('Should redirect to root after login successfully', () => {
     fetchMock.mock('http://0.0.0.0:3000/users/sign_in', 'POST', { status: 200, body: { id: 1 } })
   })
@@ -33,5 +37,18 @@ describe("(Component) LoginFormContainer", () => {
     _wrapper.instance().formSubmit().catch(() => {
       expect(_wrapper.state().messages).to.eql(['Error'])
     })
+  })
+
+  it('Should pass formSubmit to LoginForm', () => {
+    const loginForm = _wrapper.find(LoginForm)
+    const formSubmit = _wrapper.instance().formSubmit
+
+    expect(loginForm.prop('onSubmit')).to.eql(formSubmit)
+  })
+
+  it('Should pass messages to LoginForm', () => {
+    const loginForm = _wrapper.find(LoginForm)
+
+    expect(loginForm.prop('messages')).to.equal(_wrapper.state('messages'))
   })
 })

@@ -9,7 +9,6 @@ import { changeActiveUser, CHANGE_ACTIVE_USER } from './modules/actions'
 import { activeUser } from './modules/reducers'
 import style from './UserList.scss'
 
-@refetch({ users: '/users' })
 export class UserList extends Component {
   static contextTypes = {
     store: PropTypes.object
@@ -49,4 +48,6 @@ export class UserList extends Component {
   }
 }
 
-export default connect()(UserList)
+export default connect()(
+  refetch({ users: '/users' })(UserList)
+)
