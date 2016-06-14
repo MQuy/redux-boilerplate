@@ -16,7 +16,7 @@ const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: (state) => state.router
 })
 
-let render = (key = null) => {
+const render = (key = null) => {
   const routes = require('./routes/index').default(store)
   const App = (
     <Provider store={store}>

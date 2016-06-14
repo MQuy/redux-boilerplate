@@ -11,7 +11,7 @@ const refetch = (config) => (Component) => class _ extends React.Component {
   }
   render() {
     return (
-      <Component {...this.props} {...this.state}/>
+      <Component {...this.props} {...this.state} />
     )
   }
 }

@@ -20,7 +20,7 @@ export class LoginFormContainer extends Component {
 
     // NOTE: This then doesn't call in test
     return loginAction(user, dispatch)
-      .then(() => { asdasdas.dasdasdasd; router.push('/') })
+      .then(() => { router.push('/') })
       .catch(json => this.setState({messages: json}))
   }
   render() {

@@ -1,4 +1,4 @@
-import { applyMiddleware, compose, createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 
@@ -7,7 +7,7 @@ import { get, post } from '$root/modules/fetch'
 
 export default (initialState = {}, history) => {
   const thunkWrapper = thunk.withExtraArgument({ get, post })
-  let middleware = applyMiddleware(thunkWrapper, routerMiddleware(history))
+  const middleware = applyMiddleware(thunkWrapper, routerMiddleware(history))
 
   const store = createStore(reducers(), initialState, middleware)
 

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import LoginForm from './LoginForm'
 import { authorized } from '$root/modules/currentUser'
 import style from './index.scss'
@@ -11,15 +11,11 @@ function checkAuth(store) {
   }
 }
 
-class Main extends Component {
-  render() {
-    return (
-      <div className={style.login}>
-        <LoginForm></LoginForm>
-      </div>
-    )
-  }
-}
+const Main = () => (
+  <div className={style.login}>
+    <LoginForm />
+  </div>
+)
 
 export default (store) => ({
   component: Main,
