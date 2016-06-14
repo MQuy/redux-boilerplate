@@ -5,6 +5,7 @@
   "scripts": {
     "start": "better-npm-run start",
     "build": "better-npm-run build",
+    "syntax": "better-npm-run syntax",
     "clean": "node ./bin/clean.js createdir",
     "test": "better-npm-run test"
   },
@@ -23,6 +24,9 @@
     },
     "test": {
       "command": "babel-node ./node_modules/karma/bin/karma start ./webpack/webpack.test.js"
+    },
+    "syntax": {
+      "command": "babel-node ./node_modules/stylelint/dist/cli.js \"src/**/*.scss\""
     }
   },
   "author": "MQuy",
@@ -78,6 +82,7 @@
     "sass-loader": "^3.2.0",
     "sinon": "^1.17.4",
     "style-loader": "^0.13.1",
+    "stylelint": "^6.6.0",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.10.0"
