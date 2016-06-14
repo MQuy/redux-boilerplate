@@ -3,12 +3,12 @@
   position: relative;
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 28px;
     right: 28px;
-    border-bottom: 1px dashed #E9E9E9;
+    border-bottom: 1px dashed #e9e9e9;
   }
 
   &:last-of-type:after {
