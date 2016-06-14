@@ -5,7 +5,7 @@
   "scripts": {
     "start": "better-npm-run start",
     "build": "better-npm-run build",
-    "syntax": "better-npm-run syntax",
+    "lint": "better-npm-run lint",
     "clean": "node ./bin/clean.js createdir",
     "test": "better-npm-run test"
   },
@@ -25,8 +25,8 @@
     "test": {
       "command": "babel-node ./node_modules/karma/bin/karma start ./webpack/webpack.test.js"
     },
-    "syntax": {
-      "command": "babel-node ./node_modules/stylelint/dist/cli.js \"src/**/*.scss\""
+    "lint": {
+      "command": "babel-node ./node_modules/stylelint/dist/cli.js src/**/*.scss && babel-node ./node_modules/eslint/bin/eslint.js src/**/*.js"
     }
   },
   "author": "MQuy",
@@ -55,6 +55,11 @@
     "cors": "^2.7.1",
     "css-loader": "^0.23.1",
     "enzyme": "^2.3.0",
+    "eslint": "^2.12.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.1",
+    "eslint-plugin-jsx-a11y": "^1.4.2",
+    "eslint-plugin-react": "^5.1.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "fetch-mock": "^4.5.0",
     "file-loader": "^0.8.5",
