@@ -2,5 +2,18 @@
     "extends": "airbnb",
     "plugins": [
         "react"
-    ]
+    ],
+    "parserOptions": {
+        "ecmaVersion": 7,
+        "ecmaFeatures": {
+          "jsx": true,
+          "experimentalObjectRestSpread": true
+        }
+    },
+    "rules": {
+      "semi": 0,
+      "comma-dangle": ["error", "never"],
+      "no-use-before-define": ["error", { "functions": false, "classes": true }],
+      "no-else-return": 0
+    }
 }

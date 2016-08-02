@@ -4,7 +4,7 @@ import lodash from 'lodash'
 import inflection from 'inflection'
 
 export function parseJSON(response) {
-  var json = response.json();
+  const json = response.json();
 
   if (response.status >= 200 && response.status < 300) {
     return json;
@@ -14,13 +14,13 @@ export function parseJSON(response) {
 }
 
 export function request(path, params) {
-  let currentUser = simpleStorage.get('currentUser') || {};
+  const currentUser = simpleStorage.get('currentUser') || {};
 
   params.headers = {
-    'Accept': 'application/json',
+    Accept: 'application/json',
     'Content-Type': 'application/json',
-    'Email': currentUser.email,
-    'Token': currentUser.authenticationToken,
+    Email: currentUser.email,
+    Token: currentUser.authenticationToken,
     ...(params.headers || {})
   }
   return fetch(`http://0.0.0.0:3000${path}`, params)
@@ -29,47 +29,48 @@ export function request(path, params) {
 }
 
 export function get(path, params) {
-  return request(path, { method: 'GET' });
+  const body = JSON.stringify(denomailize(params));
+
+  return request(path, { method: 'GET', body });
 }
 
 export function post(path, params) {
-  let body = JSON.stringify(denomailize(params));
+  const body = JSON.stringify(denomailize(params));
 
-  return request(path, { body: body, method: 'POST' });
+  return request(path, { method: 'POST', body });
 }
 
 function normalize(data) {
-  var results = lodash.isArray(data) ? [] : {};
+  let results = lodash.isArray(data) ? [] : {};
 
   lodash.each(data, function(value, key) {
-    var nv = lodash.isObject(value) ? normalize(value) : value;
+    const nv = lodash.isObject(value) ? normalize(value) : value;
     results[lodash.isNumber(key) ? key : inflection.camelize(key, true)] = nv;
   });
 
   return results;
-
 }
 
 function denomailize(data) {
-  var results = lodash.isArray(data) ? [] : {};
+  let results = lodash.isArray(data) ? [] : {};
 
   lodash.each(data, function(value, key) {
-    var dnv = lodash.isObject(value) ? denomailize(value) : value;
+    const dnv = lodash.isObject(value) ? denomailize(value) : value;
     results[underscoreKey(key)] = dnv;
   });
 
   return results;
-
 }
 
 function underscoreKey(key) {
-  var udkey;
+  let udkey;
 
   if (lodash.isString(key)) {
     udkey = inflection.underscore(key);
-    if (lodash.startsWith(key, '_')) udkey = '_' + udkey;
+    if (lodash.startsWith(key, '_')) udkey = `_${udkey}`;
   } else {
     udkey = key;
   }
+
   return udkey;
 }
