@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var historyApiFallback = require('connect-history-api-fallback')
 var webpackDevMiddleware = require("webpack-dev-middleware");
 var webpackHotMiddleware = require("webpack-hot-middleware");
-var webpackConfig = require('./webpack/webpack.config');
+var webpackConfig = require('./cli/webpack.config');
 var express = require("express");
 var path = require("path");
 

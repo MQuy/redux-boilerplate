@@ -29,9 +29,13 @@ export function request(path, params) {
 }
 
 export function get(path, params) {
-  const body = JSON.stringify(denomailize(params));
+  const normalizeParams = denomailize(params);
+  const body = Object.keys(normalizeParams)
+                   .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(normalizeParams[key]))
+                   .join("&")
+                   .replace(/%20/g, "+");
 
-  return request(path, { method: 'GET', body });
+  return request(`${path}?${body}`, { method: 'GET' });
 }
 
 export function post(path, params) {

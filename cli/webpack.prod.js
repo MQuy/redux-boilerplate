@@ -1,23 +1,28 @@
-var webpack = require('webpack');
-var path = require('path');
+var webpack = require('webpack')
+var path = require('path')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 var rootPath = path.join(__dirname, '../');
 
 module.exports = {
   name: 'client',
-  target: 'web',
-  devtool: 'eval',
-  context: path.join(rootPath, '/src'),
+  target: 'electron-renderer',
+  devtool: null,
+  context: path.join(rootPath, "/src"),
 
   resolve: {
     extensions: ['', '.js', '.jsx', '.json', '.scss', '.html'],
-    alias: { $root: path.join(rootPath, "/src") }
+    alias: {
+      $root: path.join(rootPath, "/src")
+    }
   },
+
+  stats: { children: false },
 
   entry: {
     app: [
-      'webpack-hot-middleware/client',
       './main.js'
     ],
     vendor: [
@@ -33,29 +38,40 @@ module.exports = {
       'simplestorage.js',
       'inflection',
       'bootstrap-loader/extractStyles',
-      'font-awesome-webpack!../webpack/theme/font-awesome.config.js'
+      'font-awesome-webpack!../cli/theme/font-awesome.config.prod.js'
     ]
   },
 
   output: {
-    filename: "[name].js",
-    path: path.join(rootPath, "/dist"),
-    publicPath: '/'
+    filename: "[name]-[chunkhash].js",
+    path: path.join(rootPath, "/publish"),
+    publicPath: './'
   },
 
   module: {
     loaders: [{
       test: /\.(js|jsx)$/,
+      include: path.join(rootPath, 'src'),
       exclude: /node_modules/,
-      loaders: ['react-hot', 'babel'],
+      loader: 'babel',
+      query: {
+        babelrc: false,
+        presets: ["es2015", "react", "stage-0", "react-optimize"],
+        plugins: [
+          "transform-runtime",
+          "transform-decorators-legacy"
+        ]
+      }
     }, {
       test: /\.json$/,
       loader: 'json-loader',
     }, {
       test: /\.txt$/,
+      include: path.join(rootPath, 'src'),
       loader: 'raw-loader',
     }, {
       test: /\.(css|scss)$/,
+      include: path.join(rootPath, 'src'),
       loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules!sass-loader!postcss-loader')
     }, {
       test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
@@ -78,22 +94,33 @@ module.exports = {
     }]
   },
 
+  postcss: [
+    autoprefixer({
+      browsers: ['last 2 versions']
+    })
+  ],
+
   plugins: [
-    new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        unused: true,
+        dead_code: true,
+        warnings: false
+      }
+    }),
     new webpack.DefinePlugin({
       __DEV__: false,
       __DEBUG__: false,
       __PROD__: true,
       __INITIAL_STATE__: {},
       'process.env': {
-        'NODE_ENV': JSON.stringify('development'),
+        'NODE_ENV': JSON.stringify('production'),
       },
     }),
     new webpack.optimize.CommonsChunkPlugin({ names: ['vendor'] }),
-    new ExtractTextPlugin("[name].css", { allChunks: true }),
+    new ExtractTextPlugin("[name]-[contenthash].css"),
     new HtmlWebpackPlugin({
       template: 'index.html',
       filename: 'index.html',
@@ -102,6 +129,9 @@ module.exports = {
       minify: {
         collapseWhitespace: true
       }
-    })
+    }),
+    new CopyWebpackPlugin([
+      { from: 'static' }
+    ])
   ]
 }
