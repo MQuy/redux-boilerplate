@@ -38,6 +38,7 @@ module.exports = {
       'simplestorage.js',
       'inflection',
       'bootstrap-loader/extractStyles',
+      'font-awesome-webpack!../webpack/theme/font-awesome.config.prod.js'
     ]
   },
 
@@ -73,23 +74,20 @@ module.exports = {
       include: path.join(rootPath, 'src'),
       loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules!sass-loader!postcss-loader')
     }, {
-      test: /\.woff(\?.*)?$/,
-      loader: 'url?name=[path][name].[ext]&mimetype=application/font-woff'
+      test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "url?limit=10000&mimetype=application/font-woff"
     }, {
-      test: /\.woff2(\?.*)?$/,
-      loader: 'url?name=[path][name].[ext]&mimetype=application/font-woff2'
+      test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "url?limit=10000&mimetype=application/font-woff"
     }, {
-      test: /\.otf(\?.*)?$/,
-      loader: 'file?&name=[path][name].[ext]&mimetype=font/opentype'
+      test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "url?limit=10000&mimetype=application/octet-stream"
     }, {
-      test: /\.ttf(\?.*)?$/,
-      loader: 'url?&name=[path][name].[ext]&mimetype=application/octet-stream'
+      test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "file"
     }, {
-      test: /\.eot(\?.*)?$/,
-      loader: 'file?&name=[path][name].[ext]'
-    }, {
-      test: /\.svg(\?.*)?$/,
-      loader: 'url?&name=[path][name].[ext]&mimetype=image/svg+xml'
+      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "url?limit=10000&mimetype=image/svg+xml"
     }, {
       test: /\.(png|jpg)$/,
       loader: 'url?name=[path][name].[ext]'

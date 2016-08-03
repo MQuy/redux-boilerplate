@@ -1,10 +1,4 @@
-$fa-font-path: "/fonts";
-$fa-version: "4.6.1" !default;
-
-@import "base/font";
-
 :global {
-  @import "~font-awesome/scss/font-awesome";
   @import "base/normalize";
   @import "module/panel";
 }
