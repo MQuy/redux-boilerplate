@@ -5,6 +5,8 @@
   "description": "Sample for redux auth",
   "scripts": {
     "start": "better-npm-run start",
+    "client": "babel-node ./cli/client.js",
+    "server": "babel-node ./cli/server.js",
     "build": "better-npm-run build",
     "lint": "better-npm-run lint",
     "clean": "rimraf publish",
@@ -100,6 +102,7 @@
     "stylelint": "^6.6.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
+    "webpack-dashboard": "0.1.6",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.10.0"
   },

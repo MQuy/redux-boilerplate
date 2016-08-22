@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import createBrowserHistory from 'history/lib/createBrowserHistory'
+import { createHashHistory } from 'history'
 import { Router, useRouterHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from './store/createStore'
@@ -9,7 +9,7 @@ import Root from './components/Root'
 
 const MOUNT_ELEMENT = document.getElementById('root')
 
-const browserHistory = useRouterHistory(createBrowserHistory)({ basename: '' })
+const browserHistory = useRouterHistory(createHashHistory)({ basename: '' })
 
 const store = createStore(__INITIAL_STATE__, browserHistory)
 const history = syncHistoryWithStore(browserHistory, store, {
