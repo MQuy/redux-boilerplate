@@ -1,8 +1,8 @@
 {
-  "name": "redux-auth-boilerplate",
+  "name": "redux-boilerplate",
   "main": "main.js",
   "version": "1.0.0",
-  "description": "Sample for redux auth",
+  "description": "Sample for redux",
   "scripts": {
     "start": "better-npm-run start",
     "client": "babel-node ./cli/client.js",

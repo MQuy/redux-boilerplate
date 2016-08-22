@@ -1,29 +1,31 @@
-# Redux Auth Boilerplate
+# Redux Boilerplate
 
 ### Getting Started
 
 ```bash
-$ git clone https://github.com/MQuy/redux-auth-boilerplate
+$ git clone https://github.com/MQuy/redux-boilerplate
 $ cd redux-boilerplater
 $ npm install
-$ node client.js        # launch client
-$ node server.js        # launch fake server
+$ npm run client        # launch client
+$ npm run server        # launch fake server
 ```
 
 ### Command
 
 | `<script>` | Description |
 | ------------------ | ----------- |
-| `node app.js` | Serves your app at `localhost:3005`. HMR will be enabled in development. |
-| `node server.js` | Serves your endpoint at `localhost:3000`. |
+| `npm run client` | Serves your app at `localhost:3005`. HMR will be enabled in development. |
+| `npm run server` | Serves your endpoint at `localhost:3000`. |
 | `npm run clean` | Clean the old assets. |
 | `npm run build` | Compile the application to disk. |
+| `npm run pack` | Using electron to build cross platform app. |
+| `npm run test` | Run test. |
 
 ### Application Structure
 
 ```
 .
-├── bin                      # Build/Start scripts
+├── cli                      # Build/Start scripts
 ├── src                      # Application source code
 │   ├── main.js              # Application bootstrap and rendering
 │   ├── components           # Reusable Presentational Components
@@ -39,5 +41,6 @@ $ node server.js        # launch fake server
 │           ├── index.js     # Route definitions and async split points
 │           ├── Components   # Component that is used in this route
 │           └── routes **    # Fractal sub-routes (** optional)
-├── webpack                  # Webpack configuration
+├── publish                  # Files after compile, ready for production
+├── tests                    # Test files
 ```
