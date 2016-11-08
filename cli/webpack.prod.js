@@ -8,7 +8,7 @@ var rootPath = path.join(__dirname, '../');
 
 module.exports = {
   name: 'client',
-  target: 'electron-renderer',
+  target: 'web',
   devtool: null,
   context: path.join(rootPath, "/src"),
 
