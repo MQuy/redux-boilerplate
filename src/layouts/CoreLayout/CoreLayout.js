@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import Header from '$root/components/Header'
 import Footer from '$root/components/Footer'
 import classes from './CoreLayout.scss'

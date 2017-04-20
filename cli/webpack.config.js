@@ -11,7 +11,7 @@ module.exports = {
   context: path.join(rootPath, '/src'),
 
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json', '.scss', '.html'],
+    extensions: ['.js', '.jsx', '.json', '.scss', '.html'],
     alias: { $root: path.join(rootPath, "/src") }
   },
 
@@ -23,6 +23,7 @@ module.exports = {
     vendor: [
       'react',
       'react-dom',
+      'prop-types',
       'history',
       'react-redux',
       'react-router',
@@ -44,44 +45,54 @@ module.exports = {
   },
 
   module: {
-    loaders: [{
+    rules: [{
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      loaders: ['react-hot', 'babel'],
-    }, {
-      test: /\.json$/,
-      loader: 'json-loader',
+      loaders: ['react-hot-loader', 'babel-loader'],
     }, {
       test: /\.txt$/,
       loader: 'raw-loader',
     }, {
       test: /\.(css|scss)$/,
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules!sass-loader!postcss-loader')
+      loader: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
+          'css-loader?modules!sass-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function () {
+                return [
+                  require('autoprefixer')({ browsers: 'last 2 versions' })
+                ];
+              }
+            }
+          },
+        ]
+      })
     }, {
       test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "url?limit=10000&mimetype=application/font-woff"
+      loader: "url-loader?limit=10000&mimetype=application/font-woff"
     }, {
       test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "url?limit=10000&mimetype=application/font-woff"
+      loader: "url-loader?limit=10000&mimetype=application/font-woff"
     }, {
       test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "url?limit=10000&mimetype=application/octet-stream"
+      loader: "url-loader?limit=10000&mimetype=application/octet-stream"
     }, {
       test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "file"
+      loader: "file-loader"
     }, {
       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "url?limit=10000&mimetype=image/svg+xml"
+      loader: "url-loader?limit=10000&mimetype=image/svg+xml"
     }, {
       test: /\.(png|jpg)$/,
-      loader: 'url?name=[path][name].[ext]'
+      loader: 'url-loader?name=[path][name].[ext]'
     }]
   },
 
   plugins: [
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       __DEV__: false,
@@ -93,7 +104,7 @@ module.exports = {
       },
     }),
     new webpack.optimize.CommonsChunkPlugin({ names: ['vendor'] }),
-    new ExtractTextPlugin("[name].css", { allChunks: true }),
+    new ExtractTextPlugin({ filename: '[name].css', allChunks: true }),
     new HtmlWebpackPlugin({
       template: 'index.html',
       filename: 'index.html',

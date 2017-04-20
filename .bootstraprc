@@ -10,10 +10,10 @@ useFlexbox: true
 
 # Webpack loaders, order matters
 styleLoaders:
-  - style
-  - css
-  - postcss
-  - sass
+  - style-loader
+  - css-loader
+  - postcss-loader
+  - sass-loader
 
 # Extract styles to stand-alone css file
 # Different settings for different environments can be used,
@@ -72,46 +72,43 @@ styles:
   print: true
 
   # Core CSS
-  reboot: true
-  type: true
-  images: true
-  code: true
-  grid: true
-  tables: true
-  forms: true
   buttons: true
+  code: true
+  forms: true
+  grid: true
+  images: true
+  reboot: true
+  tables: true
+  type: true
 
   # Components
-  animation: true
-  dropdown: true
+  alert: true
+  badge: true
+  breadcrumb: true
   button-group: true
-  input-group: true
+  card: true
+  close: true
   custom-forms: true
+  dropdown: true
+  input-group: true
+  jumbotron: true
+  list-group: true
+  media: true
   nav: true
   navbar: true
-  card: true
-  breadcrumb: true
   pagination: true
-  pager: true
-  labels: true
-  jumbotron: true
-  alert: true
   progress: true
-  media: true
-  list-group: true
   responsive-embed: true
-  close: true
+  transitions: true
 
   # Components w/ JavaScript
-  modal: false
-  tooltip: false
-  popover: false
-  carousel: false
+  carousel: true
+  modal: true
+  popover: true
+  tooltip: true
 
   # Utility classes
   utilities: true
-  utilities-spacing: true
-  utilities-responsive: true
 
 ### Bootstrap scripts
 scripts: false

@@ -9,11 +9,11 @@ var rootPath = path.join(__dirname, '../');
 module.exports = {
   name: 'client',
   target: 'web',
-  devtool: null,
+  devtool: false,
   context: path.join(rootPath, "/src"),
 
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json', '.scss', '.html'],
+    extensions: ['.js', '.jsx', '.json', '.scss', '.html'],
     alias: {
       $root: path.join(rootPath, "/src")
     }
@@ -28,6 +28,7 @@ module.exports = {
     vendor: [
       'react',
       'react-dom',
+      'prop-types',
       'history',
       'react-redux',
       'react-router',
@@ -49,11 +50,11 @@ module.exports = {
   },
 
   module: {
-    loaders: [{
+    rules: [{
       test: /\.(js|jsx)$/,
       include: path.join(rootPath, 'src'),
       exclude: /node_modules/,
-      loader: 'babel',
+      loader: 'babel-loader',
       query: {
         babelrc: false,
         presets: ["es2015", "react", "stage-0", "react-optimize"],
@@ -63,46 +64,50 @@ module.exports = {
         ]
       }
     }, {
-      test: /\.json$/,
-      loader: 'json-loader',
-    }, {
       test: /\.txt$/,
       include: path.join(rootPath, 'src'),
       loader: 'raw-loader',
     }, {
       test: /\.(css|scss)$/,
       include: path.join(rootPath, 'src'),
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules!sass-loader!postcss-loader')
+      loader: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
+          'css-loader?modules!sass-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function () {
+                return [
+                  require('autoprefixer')({ browsers: 'last 2 versions' })
+                ];
+              }
+            }
+          },
+        ]
+      })
     }, {
       test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "url?limit=10000&mimetype=application/font-woff"
+      loader: "url-loader?limit=10000&mimetype=application/font-woff"
     }, {
       test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "url?limit=10000&mimetype=application/font-woff"
+      loader: "url-loader?limit=10000&mimetype=application/font-woff"
     }, {
       test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "url?limit=10000&mimetype=application/octet-stream"
+      loader: "url-loader?limit=10000&mimetype=application/octet-stream"
     }, {
       test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "file"
+      loader: "file-loader"
     }, {
       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "url?limit=10000&mimetype=image/svg+xml"
+      loader: "url-loader?limit=10000&mimetype=image/svg+xml"
     }, {
       test: /\.(png|jpg)$/,
-      loader: 'url?name=[path][name].[ext]'
+      loader: 'url-loader?name=[path][name].[ext]'
     }]
   },
 
-  postcss: [
-    autoprefixer({
-      browsers: ['last 2 versions']
-    })
-  ],
-
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         unused: true,
