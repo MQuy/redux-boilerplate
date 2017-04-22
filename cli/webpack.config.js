@@ -24,10 +24,8 @@ module.exports = {
       'react',
       'react-dom',
       'prop-types',
-      'history',
       'react-redux',
       'react-router',
-      'react-router-redux',
       'redux',
       'whatwg-fetch',
       'simplestorage.js',
@@ -91,7 +89,7 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       __DEV__: false,
