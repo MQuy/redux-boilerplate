@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import lodash from 'lodash'
+import isEmpty from 'lodash/isEmpty'
 import refetch from '$root/modules/refetch'
 import Loading from '$root/components/Loading'
 import { injectReducer } from '$root/store/reducers'
@@ -31,7 +31,7 @@ export class UserList extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     const { users } = nextProps;
 
-    return !lodash.isEmpty(users);
+    return !isEmpty(users);
   }
   render() {
     const { setActiveUser, users } = this.props;
@@ -39,7 +39,7 @@ export class UserList extends Component {
     return (
       <div className="panel">
         <div className="title">Users</div>
-        { lodash.isEmpty(users) ?
+        { isEmpty(users) ?
             <Loading/> :
             users.map(user => <User user={user} key={user.id} onClick={() => this.setActiveUser(user)}/>)
         }

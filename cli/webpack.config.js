@@ -30,7 +30,6 @@ module.exports = {
       'react-router-redux',
       'redux',
       'whatwg-fetch',
-      'lodash',
       'simplestorage.js',
       'inflection',
       'bootstrap-loader/extractStyles',

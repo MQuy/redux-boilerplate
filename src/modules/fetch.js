@@ -1,6 +1,11 @@
 import 'whatwg-fetch'
 import simpleStorage from 'simplestorage.js'
-import lodash from 'lodash'
+import isNumber from 'lodash/isNumber'
+import isObject from 'lodash/isObject'
+import isArray from 'lodash/isArray'
+import isString from 'lodash/isString'
+import forEach from 'lodash/forEach'
+
 import inflection from 'inflection'
 
 export function parseJSON(response) {
@@ -45,21 +50,21 @@ export function post(path, params) {
 }
 
 function normalize(data) {
-  let results = lodash.isArray(data) ? [] : {};
+  let results = Array.isArray(data) ? [] : {};
 
-  lodash.each(data, function(value, key) {
-    const nv = lodash.isObject(value) ? normalize(value) : value;
-    results[lodash.isNumber(key) ? key : inflection.camelize(key, true)] = nv;
+  forEach(data, function(value, key) {
+    const nv = isObject(value) ? normalize(value) : value;
+    results[isNumber(key) ? key : inflection.camelize(key, true)] = nv;
   });
 
   return results;
 }
 
 function denomailize(data) {
-  let results = lodash.isArray(data) ? [] : {};
+  let results = isArray(data) ? [] : {};
 
-  lodash.each(data, function(value, key) {
-    const dnv = lodash.isObject(value) ? denomailize(value) : value;
+  forEach(data, function(value, key) {
+    const dnv = isObject(value) ? denomailize(value) : value;
     results[underscoreKey(key)] = dnv;
   });
 
@@ -69,9 +74,9 @@ function denomailize(data) {
 function underscoreKey(key) {
   let udkey;
 
-  if (lodash.isString(key)) {
+  if (isString(key)) {
     udkey = inflection.underscore(key);
-    if (lodash.startsWith(key, '_')) udkey = `_${udkey}`;
+    if (key.startsWith('_')) udkey = `_${udkey}`;
   } else {
     udkey = key;
   }

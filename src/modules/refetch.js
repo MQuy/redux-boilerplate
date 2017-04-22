@@ -1,10 +1,10 @@
 import React from 'react'
-import lodash from 'lodash'
 import { get } from './fetch'
+import forEach from 'lodash/forEach'
 
 const refetch = (config) => (Component) => class _ extends React.Component {
   componentWillMount() {
-    lodash.forIn(config, (link, stateName) => {
+    forEach(config, (link, stateName) => {
       get(link)
         .then(json => this.setState({ [stateName]: json }))
     })

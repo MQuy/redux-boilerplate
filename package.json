@@ -113,7 +113,7 @@
     "font-awesome": "^4.6.3",
     "history": "^3.2.1",
     "inflection": "^1.10.0",
-    "lodash": "^4.13.1",
+    "lodash": "^4.17.4",
     "prop-types": "^15.5.8",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
@@ -125,6 +125,7 @@
     "redux-thunk": "^2.1.0",
     "simplestorage.js": "^0.2.1",
     "typescript": "^2.2.2",
+    "webpack-bundle-analyzer": "^2.4.0",
     "whatwg-fetch": "^2.0.3"
   }
 }

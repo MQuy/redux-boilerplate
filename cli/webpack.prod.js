@@ -3,6 +3,7 @@ var path = require('path')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 var autoprefixer = require('autoprefixer');
 var rootPath = path.join(__dirname, '../');
 
@@ -35,7 +36,6 @@ module.exports = {
       'react-router-redux',
       'redux',
       'whatwg-fetch',
-      'lodash',
       'simplestorage.js',
       'inflection',
       'bootstrap-loader/extractStyles',
@@ -108,6 +108,7 @@ module.exports = {
   },
 
   plugins: [
+    new BundleAnalyzerPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         unused: true,

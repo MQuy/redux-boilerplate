@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import lodash from 'lodash'
 import { get } from '$root/modules/fetch'
 import Loading from '$root/components/Loading'
 import style from './Report.scss'
