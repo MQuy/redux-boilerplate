@@ -9,13 +9,11 @@ const MOUNT_ELEMENT = document.getElementById('root')
 
 const store = createStore(__INITIAL_STATE__)
 
-const render = (key = null) => {
+const render = () => {
   const routes = require('./routes/index').default(store)
   const App = (
     <Provider store={store}>
-      <Router history={browserHistory} key={key}>
-        <Router childRoutes={routes} component={Root}/>
-      </Router>
+      <Router history={browserHistory} children={routes} component={Root}/>
     </Provider>
   )
   ReactDOM.render(App, MOUNT_ELEMENT)

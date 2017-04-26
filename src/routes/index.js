@@ -1,7 +1,6 @@
 import CoreLayout from '$root/layouts/CoreLayout/CoreLayout'
 import Home from './Home'
 import Login from './Login'
-import NotFound from './NotFound'
 
 export const createRoutes = (store) => {
   const routes = [{
@@ -13,10 +12,20 @@ export const createRoutes = (store) => {
     indexRoute: Home(store)
   }, {
     path: '*',
-    component: NotFound
+    getComponent: (_, cb) => {
+      System.import('./NotFound').then(loadRoute(cb)).catch(errorLoading)
+    }
   }]
 
   return routes
+}
+
+function errorLoading(err) {
+ console.error('Dynamic page loading failed', err);
+}
+
+function loadRoute(cb) {
+ return (module) => cb(null, module.default);
 }
 
 export default createRoutes
