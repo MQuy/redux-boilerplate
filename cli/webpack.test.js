@@ -1,5 +1,5 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-import webpackConfig from './webpack.config'
+import webpackConfig from './webpack.dev'
 
 const karmaConfig = {
   basePath: '../',

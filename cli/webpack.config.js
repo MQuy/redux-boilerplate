@@ -1,52 +1,27 @@
-var webpack = require('webpack');
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var rootPath = path.join(__dirname, '../');
+const webpack = require('webpack');
+const path = require('path');
+const glob = require('glob');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const rootPath = path.join(__dirname, '../');
 
 module.exports = {
   name: 'client',
   target: 'web',
-  devtool: 'eval',
   context: path.join(rootPath, '/src'),
 
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss', '.html'],
-    alias: { $root: path.join(rootPath, "/src") }
-  },
-
-  entry: {
-    app: [
-      'webpack-hot-middleware/client',
-      './main.js'
-    ],
-    vendor: [
-      'react',
-      'react-dom',
-      'prop-types',
-      'react-redux',
-      'react-router',
-      'redux',
-      'whatwg-fetch',
-      'simplestorage.js',
-      'inflection',
-      'bootstrap-loader/extractStyles',
-      'font-awesome-webpack!../cli/theme/font-awesome.config.js'
-    ]
-  },
-
-  output: {
-    filename: "[name].js",
-    path: path.join(rootPath, "/dist"),
-    publicPath: '/'
+    alias: {
+      $root: path.join(rootPath, "/src")
+    }
   },
 
   module: {
     rules: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      loaders: ['react-hot-loader', 'babel-loader'],
-    }, {
       test: /\.txt$/,
       loader: 'raw-loader',
     }, {
@@ -54,7 +29,15 @@ module.exports = {
       loader: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [
-          'css-loader?modules!sass-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          },
+          {
+            loader: 'sass-loader'
+          },
           {
             loader: 'postcss-loader',
             options: {
@@ -89,19 +72,15 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
-      __DEV__: false,
-      __DEBUG__: false,
-      __PROD__: true,
-      __INITIAL_STATE__: {},
-      'process.env': {
-        'NODE_ENV': JSON.stringify('development'),
-      },
-    }),
     new webpack.optimize.CommonsChunkPlugin({ names: ['vendor'] }),
-    new ExtractTextPlugin({ filename: '[name].css', allChunks: true }),
+    new ExtractTextPlugin("[name]-[contenthash].css"),
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'redux-boilerplate',
+      filename: 'service-worker.js',
+      navigateFallback: 'index.html',
+      mergeStaticsConfig: true,
+      staticFileGlobsIgnorePatterns: [/\.icns/, /\.txt/, /\.scss/, /\.gitkeep/]
+    }),
     new HtmlWebpackPlugin({
       template: 'index.html',
       filename: 'index.html',
@@ -110,6 +89,9 @@ module.exports = {
       minify: {
         collapseWhitespace: true
       }
-    })
+    }),
+    new CopyWebpackPlugin([
+      { from: 'static' }
+    ])
   ]
 }
