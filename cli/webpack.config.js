@@ -34,11 +34,9 @@ module.exports = {
             options: {
               modules: true
             }
-          },
-          {
+          }, {
             loader: 'sass-loader'
-          },
-          {
+          }, {
             loader: 'postcss-loader',
             options: {
               plugins: function () {
@@ -64,7 +62,18 @@ module.exports = {
       loader: "file-loader"
     }, {
       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "url-loader?limit=10000&mimetype=image/svg+xml"
+      use: [
+        {
+          loader: 'file-loader?limit=10000&mimetype=image/svg+xml'
+        }, {
+          loader: 'svgo-loader',
+          options: {
+            plugins: [
+              { cleanupIDs: false }
+            ]
+          }
+        }
+      ]
     }, {
       test: /\.(png|jpg)$/,
       loader: 'url-loader?name=[path][name].[ext]'
@@ -87,7 +96,19 @@ module.exports = {
       favicon: 'static/favicon.ico',
       inject: 'body',
       minify: {
-        collapseWhitespace: true
+        html5: true,
+        collapseWhitespace: true,
+        minifyCSS: true,
+        minifyJS: true,
+        minifyURLs: false,
+        removeAttributeQuotes: true,
+        removeComments: true,
+        removeEmptyAttributes: true,
+        removeOptionalTags: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributese: true,
+        useShortDoctype: true
       }
     }),
     new CopyWebpackPlugin([

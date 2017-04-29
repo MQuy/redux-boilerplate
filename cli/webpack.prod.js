@@ -64,6 +64,9 @@ webpackConfig.plugins.push(
   new OptimizeCssAssetsPlugin({
     cssProcessor: require('cssnano')
   }),
+  // new BundleAnalyzerPlugin({
+  //   analyzerMode: 'static'
+  // }),
   new webpack.DefinePlugin({
     __DEV__: false,
     __DEBUG__: false,
@@ -72,9 +75,6 @@ webpackConfig.plugins.push(
     'process.env': {
       'NODE_ENV': JSON.stringify('production'),
     },
-  }),
-  new BundleAnalyzerPlugin({
-    analyzerMode: 'static'
   })
 );
 
