@@ -36,6 +36,12 @@ webpackConfig.output = {
   publicPath: './'
 };
 
+webpackConfig.performance = {
+  maxAssetSize: 400000,
+  maxEntrypointSize: 500000,
+  hints: 'warning'
+};
+
 webpackConfig.module.rules.push(
   {
     test: /\.(js|jsx)$/,

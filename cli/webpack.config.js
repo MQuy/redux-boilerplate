@@ -83,13 +83,6 @@ module.exports = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({ names: ['vendor'] }),
     new ExtractTextPlugin("[name]-[contenthash].css"),
-    new SWPrecacheWebpackPlugin({
-      cacheId: 'redux-boilerplate',
-      filename: 'service-worker.js',
-      navigateFallback: 'index.html',
-      mergeStaticsConfig: true,
-      staticFileGlobsIgnorePatterns: [/\.icns/, /\.txt/, /\.scss/, /\.gitkeep/]
-    }),
     new HtmlWebpackPlugin({
       template: 'index.html',
       filename: 'index.html',
@@ -113,6 +106,13 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       { from: 'static' }
-    ])
+    ]),
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'redux-boilerplate',
+      filename: 'service-worker.js',
+      navigateFallback: 'index.html',
+      mergeStaticsConfig: true,
+      staticFileGlobsIgnorePatterns: [/\.icns/, /\.txt/, /\.scss/, /\.gitkeep/]
+    })
   ]
 }
