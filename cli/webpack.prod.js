@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const rootPath = path.join(__dirname, '../');
 const webpackConfig = require('./webpack.config');
 
@@ -37,7 +38,7 @@ webpackConfig.output = {
 };
 
 webpackConfig.performance = {
-  maxAssetSize: 400000,
+  maxAssetSize: 300000,
   maxEntrypointSize: 500000,
   hints: 'warning'
 };
@@ -60,6 +61,9 @@ webpackConfig.module.rules.push(
 );
 
 webpackConfig.plugins.push(
+  // new BundleAnalyzerPlugin({
+  //   analyzerMode: 'static'
+  // }),
   new webpack.optimize.UglifyJsPlugin({
     compress: {
       unused: true,
@@ -70,9 +74,11 @@ webpackConfig.plugins.push(
   new OptimizeCssAssetsPlugin({
     cssProcessor: require('cssnano')
   }),
-  // new BundleAnalyzerPlugin({
-  //   analyzerMode: 'static'
-  // }),
+  new PreloadWebpackPlugin({
+    rel: 'preload',
+    as: 'script',
+    include: 'asyncChunks'
+  }),
   new webpack.DefinePlugin({
     __DEV__: false,
     __DEBUG__: false,
