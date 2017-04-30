@@ -24,13 +24,11 @@ webpackConfig.entry = {
     'react-redux',
     'react-router',
     'redux',
+    'whatwg-fetch',
     'simplestorage.js',
     'inflection',
     'bootstrap-loader/extractStyles',
     'font-awesome-webpack!../cli/theme/font-awesome.config.prod.js'
-  ],
-  polyfills: [
-    'whatwg-fetch'
   ]
 };
 
