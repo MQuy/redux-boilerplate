@@ -81,7 +81,7 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({ names: ['vendor'] }),
+    new webpack.optimize.CommonsChunkPlugin({ names: ['vendor', 'polyfills'] }),
     new ExtractTextPlugin("[name]-[contenthash].css"),
     new HtmlWebpackPlugin({
       template: 'index.html',
