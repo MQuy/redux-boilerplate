@@ -13,7 +13,7 @@ export const createRoutes = (store) => {
   }, {
     path: '*',
     getComponent: (_, cb) => {
-      System.import('./NotFound').then(loadRoute(cb)).catch(errorLoading)
+       import('./NotFound' /* webpackChunkName: "NotFound" */).then(loadRoute(cb)).catch(errorLoading)
     }
   }]
 

@@ -87,6 +87,7 @@ module.exports = {
       template: 'index.html',
       filename: 'index.html',
       favicon: 'static/favicon.ico',
+      title: 'Redux Boilerplate',
       inject: 'body',
       minify: {
         html5: true,

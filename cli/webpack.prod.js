@@ -3,6 +3,7 @@ const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const rootPath = path.join(__dirname, '../');
 const webpackConfig = require('./webpack.config');
 
@@ -34,6 +35,7 @@ webpackConfig.entry = {
 webpackConfig.output = {
   filename: "[name]-[chunkhash].js",
   path: path.join(rootPath, "/publish"),
+  chunkFilename: '[name]-[chunkhash].chunk.js',
   publicPath: './'
 };
 
@@ -54,7 +56,8 @@ webpackConfig.module.rules.push(
       presets: ["es2015", "react", "stage-0", "react-optimize"],
       plugins: [
         "transform-runtime",
-        "transform-decorators-legacy"
+        "transform-decorators-legacy",
+        "syntax-dynamic-import"
       ]
     }
   }
@@ -71,13 +74,14 @@ webpackConfig.plugins.push(
       warnings: false
     }
   }),
+  new ScriptExtHtmlWebpackPlugin({
+    prefetch: {
+      test: ['NotFound'],
+      chunks: 'async'
+    }
+  }),
   new OptimizeCssAssetsPlugin({
     cssProcessor: require('cssnano')
-  }),
-  new PreloadWebpackPlugin({
-    rel: 'preload',
-    as: 'script',
-    include: 'asyncChunks'
   }),
   new webpack.DefinePlugin({
     __DEV__: false,
