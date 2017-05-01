@@ -81,7 +81,14 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({ names: ['vendor'] }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor']
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      async: 'commonlazy',
+      children: true,
+      minChunks: 2
+    }),
     new ExtractTextPlugin("[name]-[contenthash].css"),
     new HtmlWebpackPlugin({
       template: 'index.html',

@@ -21,7 +21,7 @@
       }
     },
     "build": {
-      "command": "webpack --colors --display-error-details --progress --config ./cli/webpack.prod.js",
+      "command": "webpack --colors --env.prod --display-error-details --progress --config ./cli/webpack.prod.js",
       "env": {
         "NODE_ENV": "production"
       }
@@ -70,6 +70,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "express": "^4.13.4",
     "extract-text-webpack-plugin": "^2.1.0",
     "fetch-mock": "^5.10.0",
     "file-loader": "^0.11.1",
@@ -117,7 +118,6 @@
   },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.2",
-    "express": "^4.13.4",
     "font-awesome": "^4.6.3",
     "inflection": "^1.10.0",
     "lodash": "^4.17.4",
