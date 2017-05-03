@@ -4,6 +4,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const OptimizeJsPlugin = require("optimize-js-plugin");
 const rootPath = path.join(__dirname, '../');
 const webpackConfig = require('./webpack.config');
 
@@ -83,6 +84,7 @@ webpackConfig.plugins.push(
   new OptimizeCssAssetsPlugin({
     cssProcessor: require('cssnano')
   }),
+  new OptimizeJsPlugin({ sourceMap: false }),
   new webpack.DefinePlugin({
     __DEV__: false,
     __DEBUG__: false,
