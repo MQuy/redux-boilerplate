@@ -2,7 +2,6 @@ const webpack = require('webpack')
 const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const OptimizeJsPlugin = require("optimize-js-plugin");
 const rootPath = path.join(__dirname, '../');
@@ -30,6 +29,10 @@ webpackConfig.entry = {
     'inflection',
     'bootstrap-loader/extractStyles',
     'font-awesome-webpack!../cli/theme/font-awesome.config.prod.js'
+  ],
+  polyfills: [
+    'babel-polyfill',
+    'whatwg-fetch'
   ]
 };
 
@@ -73,12 +76,6 @@ webpackConfig.plugins.push(
       unused: true,
       dead_code: true,
       warnings: false
-    }
-  }),
-  new ScriptExtHtmlWebpackPlugin({
-    prefetch: {
-      test: ['NotFound'],
-      chunks: 'async'
     }
   }),
   new OptimizeCssAssetsPlugin({

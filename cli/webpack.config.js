@@ -6,6 +6,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const HtmlWebpackConditionAsset = require('html-webpack-condition-assets');
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
+const InlineChunkWebpackPlugin = require('html-webpack-inline-chunk-plugin');
 const rootPath = path.join(__dirname, '../');
 
 module.exports = {
@@ -82,12 +85,21 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor']
+      names: ['vendor', 'manifest']
     }),
     new webpack.optimize.CommonsChunkPlugin({
       async: 'commonlazy',
       children: true,
       minChunks: 2
+    }),
+    new InlineChunkWebpackPlugin({
+      inlineChunks: ['manifest']
+    }),
+    new HtmlWebpackConditionAsset({
+      assets: [{
+        chunkName: 'polyfills',
+        condition: `!('fetch' in window && 'Promise' in window && 'assign' in Object && 'keys' in Object)`
+      }]
     }),
     new ExtractTextPlugin("[name]-[contenthash].css"),
     new HtmlWebpackPlugin({
@@ -110,6 +122,17 @@ module.exports = {
         removeStyleLinkTypeAttributese: true,
         useShortDoctype: true
       }
+    }),
+    new PreloadWebpackPlugin({
+      rel: 'prefetch',
+      as: 'script',
+      include: ['NotFound']
+    }),
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      as: 'script',
+      include: ['vendor', 'app'],
+      fileBlacklist: [/\.map\./, /\.css$/]
     }),
     new CopyWebpackPlugin([
       { from: 'static' }

@@ -1,4 +1,3 @@
-import 'whatwg-fetch'
 import simpleStorage from 'simplestorage.js'
 import isNumber from 'lodash/isNumber'
 import isObject from 'lodash/isObject'
