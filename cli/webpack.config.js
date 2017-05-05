@@ -84,6 +84,7 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.optimize.LimitChunkCountPlugin({maxChunks: 15}),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest']
     }),
