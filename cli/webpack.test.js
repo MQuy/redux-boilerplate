@@ -1,20 +1,20 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-import webpackConfig from './webpack.dev'
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+import webpackConfig from "./webpack.dev"
 
 const karmaConfig = {
-  basePath: '../',
-  frameworks: ['mocha', 'chai', 'sinon'],
+  basePath: "../",
+  frameworks: ["mocha", "chai", "sinon"],
   files: [
-    'node_modules/whatwg-fetch/fetch.js',
-    'node_modules/babel-polyfill/dist/polyfill.js',
-    'tests/testHelper.js',
-    'tests/**/*.spec.js'
+    "node_modules/whatwg-fetch/fetch.js",
+    "node_modules/babel-polyfill/dist/polyfill.js",
+    "tests/testHelper.js",
+    "tests/**/*.spec.js"
   ],
   preprocessors: {
-    'tests/testHelper.js': ['webpack'],
-    'tests/**/*.spec.js': ['webpack', 'coverage']
+    "tests/testHelper.js": ["webpack"],
+    "tests/**/*.spec.js": ["webpack", "coverage"]
   },
-  browsers: ['PhantomJS'],
+  browsers: ["PhantomJS"],
   webpack: {
     devtool: webpackConfig.devtool,
     resolve: webpackConfig.resolve,
@@ -22,11 +22,11 @@ const karmaConfig = {
     plugins: [
       new ExtractTextPlugin("[name].css", { allChunks: true })
     ],
-    node : { fs: 'empty' },
+    node : { fs: "empty" },
     externals: {
-      'react/addons': true,
-      'react/lib/ExecutionEnvironment': true,
-      'react/lib/ReactContext': true
+      "react/addons": true,
+      "react/lib/ExecutionEnvironment": true,
+      "react/lib/ReactContext": true
     }
   },
   webpackMiddleware: {
@@ -35,7 +35,7 @@ const karmaConfig = {
       colors: true
     }
   },
-  reporters: ['mocha', 'coverage'],
+  reporters: ["mocha", "coverage"],
   singleRun: false,
   plugins: [
     require("karma-mocha"),

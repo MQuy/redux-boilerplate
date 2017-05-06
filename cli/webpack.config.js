@@ -1,23 +1,23 @@
-const webpack = require('webpack');
-const path = require('path');
-const glob = require('glob');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const HtmlWebpackConditionAsset = require('html-webpack-condition-assets');
-const PreloadWebpackPlugin = require('preload-webpack-plugin');
-const InlineChunkWebpackPlugin = require('html-webpack-inline-chunk-plugin');
-const rootPath = path.join(__dirname, '../');
+const webpack = require("webpack");
+const path = require("path");
+const glob = require("glob");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const HtmlWebpackConditionAsset = require("html-webpack-condition-assets");
+const PreloadWebpackPlugin = require("preload-webpack-plugin");
+const InlineChunkWebpackPlugin = require("html-webpack-inline-chunk-plugin");
+const rootPath = path.join(__dirname, "../");
 
 module.exports = {
-  name: 'client',
-  target: 'web',
-  context: path.join(rootPath, '/src'),
+  name: "client",
+  target: "web",
+  context: path.join(rootPath, "/src"),
 
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.scss', '.html'],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".scss", ".html"],
     alias: {
       $root: path.join(rootPath, "/src")
     }
@@ -26,25 +26,25 @@ module.exports = {
   module: {
     rules: [{
       test: /\.txt$/,
-      loader: 'raw-loader',
+      loader: "raw-loader",
     }, {
       test: /\.(css|scss)$/,
       loader: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
+        fallback: "style-loader",
         use: [
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               modules: true
             }
           }, {
-            loader: 'sass-loader'
+            loader: "sass-loader"
           }, {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
               plugins: function () {
                 return [
-                  require('autoprefixer')({ browsers: 'last 2 versions' })
+                  require("autoprefixer")({ browsers: "last 2 versions" })
                 ];
               }
             }
@@ -67,9 +67,9 @@ module.exports = {
       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
       use: [
         {
-          loader: 'file-loader?limit=10000&mimetype=image/svg+xml'
+          loader: "file-loader?limit=10000&mimetype=image/svg+xml"
         }, {
-          loader: 'svgo-loader',
+          loader: "svgo-loader",
           options: {
             plugins: [
               { cleanupIDs: false }
@@ -79,36 +79,36 @@ module.exports = {
       ]
     }, {
       test: /\.(png|jpg)$/,
-      loader: 'url-loader?name=[path][name].[ext]'
+      loader: "url-loader?name=[path][name].[ext]"
     }]
   },
 
   plugins: [
     new webpack.optimize.LimitChunkCountPlugin({maxChunks: 15}),
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest']
+      names: ["vendor", "manifest"]
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      async: 'commonlazy',
+      async: "commonlazy",
       children: true,
       minChunks: 2
     }),
     new InlineChunkWebpackPlugin({
-      inlineChunks: ['manifest']
+      inlineChunks: ["manifest"]
     }),
     new HtmlWebpackConditionAsset({
       assets: [{
-        chunkName: 'polyfills',
-        condition: `!('fetch' in window && 'Promise' in window && 'assign' in Object && 'keys' in Object)`
+        chunkName: "polyfills",
+        condition: `!("fetch" in window && "Promise" in window && "assign" in Object && "keys" in Object)`
       }]
     }),
     new ExtractTextPlugin("[name]-[contenthash].css"),
     new HtmlWebpackPlugin({
-      template: 'index.html',
-      filename: 'index.html',
-      favicon: 'static/favicon.ico',
-      title: 'Redux Boilerplate',
-      inject: 'body',
+      template: "index.html",
+      filename: "index.html",
+      favicon: "static/favicon.ico",
+      title: "Redux Boilerplate",
+      inject: "body",
       minify: {
         html5: true,
         collapseWhitespace: true,
@@ -125,23 +125,23 @@ module.exports = {
       }
     }),
     new PreloadWebpackPlugin({
-      rel: 'prefetch',
-      as: 'script',
-      include: ['NotFound']
+      rel: "prefetch",
+      as: "script",
+      include: ["NotFound"]
     }),
     new PreloadWebpackPlugin({
-      rel: 'preload',
-      as: 'script',
-      include: ['vendor', 'app'],
+      rel: "preload",
+      as: "script",
+      include: ["vendor", "app"],
       fileBlacklist: [/\.map\./, /\.css$/]
     }),
     new CopyWebpackPlugin([
-      { from: 'static' }
+      { from: "static" }
     ]),
     new SWPrecacheWebpackPlugin({
-      cacheId: 'redux-boilerplate',
-      filename: 'service-worker.js',
-      navigateFallback: 'index.html',
+      cacheId: "redux-boilerplate",
+      filename: "service-worker.js",
+      navigateFallback: "index.html",
       mergeStaticsConfig: true,
       staticFileGlobsIgnorePatterns: [/\.icns/, /\.txt/, /\.scss/, /\.gitkeep/]
     })

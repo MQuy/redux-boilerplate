@@ -1,11 +1,11 @@
-const webpack = require('webpack')
-const path = require('path')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const webpack = require("webpack")
+const path = require("path")
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const OptimizeJsPlugin = require("optimize-js-plugin");
-const rootPath = path.join(__dirname, '../');
-const webpackConfig = require('./webpack.config');
+const rootPath = path.join(__dirname, "../");
+const webpackConfig = require("./webpack.config");
 
 webpackConfig.devtool = false;
 
@@ -15,46 +15,46 @@ webpackConfig.stats = {
 
 webpackConfig.entry = {
   app: [
-    './main.js'
+    "./main.js"
   ],
   vendor: [
-    'react',
-    'react-dom',
-    'prop-types',
-    'react-redux',
-    'react-router',
-    'redux',
-    'whatwg-fetch',
-    'simplestorage.js',
-    'inflection',
-    'bootstrap-loader/extractStyles',
-    'font-awesome-webpack!../cli/theme/font-awesome.config.prod.js'
+    "react",
+    "react-dom",
+    "prop-types",
+    "react-redux",
+    "react-router",
+    "redux",
+    "whatwg-fetch",
+    "simplestorage.js",
+    "inflection",
+    "bootstrap-loader/extractStyles",
+    "font-awesome-webpack!../cli/theme/font-awesome.config.prod.js"
   ],
   polyfills: [
-    'babel-polyfill',
-    'whatwg-fetch'
+    "babel-polyfill",
+    "whatwg-fetch"
   ]
 };
 
 webpackConfig.output = {
   filename: "[name]-[chunkhash].js",
   path: path.join(rootPath, "/publish"),
-  chunkFilename: '[name]-[chunkhash].chunk.js',
-  publicPath: './'
+  chunkFilename: "[name]-[chunkhash].chunk.js",
+  publicPath: "./"
 };
 
 webpackConfig.performance = {
   maxAssetSize: 300000,
   maxEntrypointSize: 500000,
-  hints: 'warning'
+  hints: "warning"
 };
 
 webpackConfig.module.rules.push(
   {
     test: /\.(js|jsx)$/,
-    include: path.join(rootPath, 'src'),
+    include: path.join(rootPath, "src"),
     exclude: /node_modules/,
-    loader: 'babel-loader',
+    loader: "babel-loader",
     query: {
       babelrc: false,
       presets: ["es2015", "react", "stage-0", "react-optimize"],
@@ -69,8 +69,12 @@ webpackConfig.module.rules.push(
 
 webpackConfig.plugins.push(
   // new BundleAnalyzerPlugin({
-  //   analyzerMode: 'static'
+  //   analyzerMode: "static"
   // }),
+  new webpack.LoaderOptionsPlugin({
+    minimize: true,
+    debug: false
+  }),
   new webpack.optimize.UglifyJsPlugin({
     compress: {
       unused: true,
@@ -79,7 +83,7 @@ webpackConfig.plugins.push(
     }
   }),
   new OptimizeCssAssetsPlugin({
-    cssProcessor: require('cssnano')
+    cssProcessor: require("cssnano")
   }),
   new OptimizeJsPlugin({ sourceMap: false }),
   new webpack.DefinePlugin({
@@ -87,8 +91,8 @@ webpackConfig.plugins.push(
     __DEBUG__: false,
     __PROD__: true,
     __INITIAL_STATE__: {},
-    'process.env': {
-      'NODE_ENV': JSON.stringify('production'),
+    "process.env": {
+      "NODE_ENV": JSON.stringify("production"),
     },
   })
 );
