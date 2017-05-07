@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import { browserHistory } from 'react-router'
 
-const goBack = (e: any) : void => {
+const goBack = (e: SyntheticEvent<HTMLButtonElement>) : void => {
   e.preventDefault()
   browserHistory.goBack()
 }
