@@ -7,6 +7,7 @@
     "allowSyntheticDefaultImports": true,
     "suppressImplicitAnyIndexErrors": true,
     "moduleResolution": "node",
+    "allowJS": true,
     "strict": true,
     "lib": [ "es6", "dom" ],
     "baseUrl": "./src",

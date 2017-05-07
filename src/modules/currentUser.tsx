@@ -1,6 +1,7 @@
 import simpleStorage from 'simplestorage.js'
 
 export const SIGNOUT_SUCCESS = 'SIGNOUT_SUCCESS';
+export const AUTHORIZED_SUCCESS = 'AUTHORIZED_SUCCESS';
 
 function signOutSuccess() {
   return {

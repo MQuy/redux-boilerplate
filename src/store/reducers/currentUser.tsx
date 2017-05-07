@@ -5,7 +5,7 @@ import { AUTHORIZED_SUCCESS, SIGNOUT_SUCCESS } from '$root/modules/currentUser'
 
 export const CURRENT_USER = 'currentUser';
 
-export function currentUser(state = {}, action) {
+export const currentUser = (state = {}, action: any) => {
 
   switch(action.type) {
     case LOGIN_SUCCESS:
