@@ -40,6 +40,12 @@
   "license": "ISC",
   "devDependencies": {
     "@types/core-js": "^0.9.41",
+    "@types/inflection": "^1.5.28",
+    "@types/lodash.foreach": "^4.5.2",
+    "@types/lodash.isarray": "^4.0.2",
+    "@types/lodash.isnumber": "^3.0.2",
+    "@types/lodash.isobject": "^3.0.2",
+    "@types/lodash.isstring": "^4.0.2",
     "@types/prop-types": "^15.5.1",
     "@types/react": "^15.0.24",
     "@types/react-dom": "^15.5.0",

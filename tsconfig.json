@@ -5,6 +5,7 @@
     "target": "es5",
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
     "moduleResolution": "node",
     "strict": true,
     "lib": [ "es6", "dom" ],

@@ -14,7 +14,7 @@ export function authorized(store: any) {
   return currentUser && currentUser.id;
 }
 
-export function signOut(dispatch: any) {
+export function signOut(dispatch: (action: any) => void) {
   const result = simpleStorage.deleteKey('currentUser');
 
   dispatch(signOutSuccess());

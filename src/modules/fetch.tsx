@@ -4,10 +4,9 @@ import isObject from 'lodash/isObject'
 import isArray from 'lodash/isArray'
 import isString from 'lodash/isString'
 import forEach from 'lodash/forEach'
-
 import inflection from 'inflection'
 
-export function parseJSON(response) {
+export function parseJSON(response: Response) {
   const json = response.json();
 
   if (response.status >= 200 && response.status < 300) {
@@ -17,7 +16,7 @@ export function parseJSON(response) {
   }
 }
 
-export function request(path, params) {
+export function request(path: string, params: any) {
   const currentUser = simpleStorage.get('currentUser') || {};
 
   params.headers = {
@@ -32,23 +31,23 @@ export function request(path, params) {
     .then(json => normalize(json));
 }
 
-export function get(path, params) {
+export function get(path: string, params?: any) {
   const normalizeParams = denomailize(params);
   const body = Object.keys(normalizeParams)
-                   .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(normalizeParams[key]))
+                   .map((key: any) => encodeURIComponent(key) + "=" + encodeURIComponent(normalizeParams[key]))
                    .join("&")
                    .replace(/%20/g, "+");
 
   return request(`${path}?${body}`, { method: 'GET' });
 }
 
-export function post(path, params) {
+export function post(path: string, params?: any) {
   const body = JSON.stringify(denomailize(params));
 
   return request(path, { method: 'POST', body });
 }
 
-function normalize(data) {
+function normalize(data: any) {
   let results = Array.isArray(data) ? [] : {};
 
   forEach(data, function(value, key) {
@@ -59,7 +58,7 @@ function normalize(data) {
   return results;
 }
 
-function denomailize(data) {
+function denomailize(data: any) {
   let results = isArray(data) ? [] : {};
 
   forEach(data, function(value, key) {
@@ -70,7 +69,7 @@ function denomailize(data) {
   return results;
 }
 
-function underscoreKey(key) {
+function underscoreKey(key: string) {
   let udkey;
 
   if (isString(key)) {

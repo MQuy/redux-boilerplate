@@ -30,6 +30,44 @@
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-3.2.1.tgz#0039ab0e0be2a0cc22bac171d27a44588103d123"
 
+"@types/inflection@^1.5.28":
+  version "1.5.28"
+  resolved "https://registry.yarnpkg.com/@types/inflection/-/inflection-1.5.28.tgz#43d55e0d72cf333a2dffd9c4ec0407455a1b0931"
+
+"@types/lodash.foreach@^4.5.2":
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@types/lodash.foreach/-/lodash.foreach-4.5.2.tgz#132a6f50698775eb02a7343ac830d3db56e99141"
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash.isarray@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/lodash.isarray/-/lodash.isarray-4.0.2.tgz#700d1a08f782b5d54a4220f85165a00847d5bb32"
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash.isnumber@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@types/lodash.isnumber/-/lodash.isnumber-3.0.2.tgz#29a84b98755b6fdff2dd6016bdb43a6d0237308c"
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash.isobject@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@types/lodash.isobject/-/lodash.isobject-3.0.2.tgz#fb1aabb870e04e6e48fba68ff14b0e527c7a3908"
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash.isstring@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/lodash.isstring/-/lodash.isstring-4.0.2.tgz#fd091b6539cfa903fa76a477a70628e2da7422cd"
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.64"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.64.tgz#979cf3a3d4a368670840bf9b3e448dc33ffe84ee"
+
 "@types/prop-types@^15.5.1":
   version "15.5.1"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.1.tgz#1ecf52621299e65b855374337fb11fd2d1066fc1"
