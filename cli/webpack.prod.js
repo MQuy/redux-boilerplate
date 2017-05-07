@@ -24,7 +24,6 @@ webpackConfig.entry = {
     "react-redux",
     "react-router",
     "redux",
-    "whatwg-fetch",
     "simplestorage.js",
     "inflection",
     "bootstrap-loader/extractStyles",
