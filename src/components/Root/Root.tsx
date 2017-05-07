@@ -5,7 +5,7 @@ interface RootProps {
   readonly children: JSX.Element
 }
 
-export const Root = ({children}: RootProps) => (
+export const Root = ({ children }: RootProps) => (
   <div>{children}</div>
 )
 

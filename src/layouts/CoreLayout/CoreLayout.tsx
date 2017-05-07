@@ -5,7 +5,11 @@ import Footer from '$root/components/Footer'
 import classes from './CoreLayout.scss'
 import '$root/static/styles/core.scss'
 
-export const CoreLayout = ({ children }) => (
+interface CoreLayoutProps {
+  readonly children: JSX.Element
+}
+
+export const CoreLayout = ({ children }: CoreLayoutProps) => (
   <div>
     <Header />
     <div className={classes.mainContainer}>
@@ -14,9 +18,5 @@ export const CoreLayout = ({ children }) => (
     <Footer />
   </div>
 )
-
-CoreLayout.propTypes = {
-  children: PropTypes.element.isRequired
-}
 
 export default CoreLayout
