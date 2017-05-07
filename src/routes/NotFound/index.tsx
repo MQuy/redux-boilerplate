@@ -1,15 +1,15 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
 
-const goBack = (e) => {
+const goBack = (e: any) : void => {
   e.preventDefault()
-  return browserHistory.goBack()
+  browserHistory.goBack()
 }
 
 export const NotFound = () => (
   <div>
     <h4>Page not found!</h4>
-    <p><a href="#" onClick={goBack}>&larr; Back</a></p>
+    <p><button onClick={goBack}>← Back</button></p>
   </div>
 )
 

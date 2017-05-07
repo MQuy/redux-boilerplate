@@ -5,7 +5,15 @@ import { Link } from 'react-router'
 import { signOut } from '$root/modules/currentUser'
 import style from './Header.scss'
 
-export class Header extends Component {
+interface HeaderProps {
+  dispatch?: any;
+  currentUser: any;
+}
+
+interface HeaderState {
+}
+
+export class Header extends Component<HeaderProps, HeaderState> {
   static contextTypes = {
     router: PropTypes.object
   }
@@ -45,7 +53,7 @@ export class Header extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) : HeaderProps {
   return {
     currentUser: state.currentUser
   }

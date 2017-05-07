@@ -1,14 +1,33 @@
-import React, { Component } from 'react'
+import React, { Component, SyntheticEvent } from 'react'
 import PropTypes from 'prop-types'
 import style from './LoginForm.scss'
 
-export class LoginForm extends Component {
-  state = { email: '', password: '' }
-  fieldChange = field => e => {
+interface LoginFormProps {
+  onSubmit: (email: string, password: string) => void;
+  messages: Array<string>;
+}
+
+interface LoginFormState {
+  email: string;
+  password: string;
+}
+
+const initialState: LoginFormState = {
+  email: '',
+  password: ''
+}
+
+const inputChanged = (field: string, value: string) => (state: LoginFormState, props: LoginFormProps) => {
+  return { [field]: value };
+}
+
+export class LoginForm extends Component<LoginFormProps, LoginFormState> {
+  state = initialState
+  fieldChange = (field: string) => (e: SyntheticEvent<HTMLInputElement>) => {
     e.preventDefault();
-    this.setState({ [field]: e.target.value })
+    this.setState(inputChanged(field, e.currentTarget.value));
   }
-  formSubmit(e) {
+  formSubmit(e: SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     const { email, password } = this.state;
     const { onSubmit } = this.props;
@@ -42,11 +61,6 @@ export class LoginForm extends Component {
       </form>
     )
   }
-}
-
-LoginForm.propTypes = {
-  onSubmit: PropTypes.func,
-  messages: PropTypes.array
 }
 
 export default LoginForm

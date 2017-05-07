@@ -8,13 +8,13 @@ function signOutSuccess() {
   }
 }
 
-export function authorized(store) {
+export function authorized(store: any) {
   const { currentUser } = store.getState();
 
   return currentUser && currentUser.id;
 }
 
-export function signOut(dispatch) {
+export function signOut(dispatch: any) {
   const result = simpleStorage.deleteKey('currentUser');
 
   dispatch(signOutSuccess());
