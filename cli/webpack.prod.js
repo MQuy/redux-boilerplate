@@ -38,7 +38,7 @@ webpackConfig.entry = {
 
 webpackConfig.output = {
   filename: "[name]-[chunkhash].js",
-  path: path.join(rootPath, "/publish"),
+  path: path.join(rootPath, "/build"),
   chunkFilename: "[name]-[chunkhash].chunk.js",
   publicPath: "./"
 };
@@ -57,7 +57,7 @@ webpackConfig.module.rules.push(
     loader: "babel-loader",
     query: {
       babelrc: false,
-      presets: ["es2015", "react", "stage-0", "react-optimize"],
+      presets: ["env", "react", "stage-0", "react-optimize"],
       plugins: [
         "transform-runtime",
         "transform-decorators-legacy",
@@ -71,6 +71,7 @@ webpackConfig.plugins.push(
   // new BundleAnalyzerPlugin({
   //   analyzerMode: "static"
   // }),
+  new webpack.optimize.ModuleConcatenationPlugin(),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
     debug: false
