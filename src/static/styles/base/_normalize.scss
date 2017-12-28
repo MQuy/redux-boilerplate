@@ -33,3 +33,7 @@ button, input, textarea {
 textarea {
   resize: none;
 }
+
+a[href^="http"]:empty::before {
+  content: attr(href);
+}
